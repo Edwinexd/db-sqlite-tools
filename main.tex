@@ -13,6 +13,10 @@
 \usepackage{listings}
 \usepackage{xcolor}
 
+\usepackage{helvet} % Add sans-serif font package
+\renewcommand{\familydefault}{\sfdefault} % Set sans-serif as default
+
+\graphicspath{{images/}}
 
 \usepackage{ifpdf}
 \ifpdf
@@ -20,6 +24,8 @@
 \else
 	\usepackage{url}
 \fi
+
+
 
 \def \lstlistingname {SQL}
 \lstset{
@@ -58,6 +64,7 @@
 %     \item Person 3 \url{username3}
 % \end{itemize}
 
+% TODO: Don't write "we", "I" or "us".
 
 \section{The Database Model}
 \label{exampleDatabaseModel}
@@ -65,17 +72,17 @@ In this document we will be using a simple database model which represents an em
 
 The original domain correct UML class diagram can be seen in figure \ref{fig:originalUMLClassDiagram}. And the corresponding database model can be seen in figure \ref{fig:originalDatabaseModel}. This document will not go into details on how or why the database model is created this way but rather focus on how to use the SQLite Modelling Tools to implement the database model. For details on how to go to a RDBMS friendly model from a domain model see lecture slides and literature.
 
-% images/model/{database_friendly, instance, original_uml_class_diagram}.png
+% model/{database_friendly, instance, original_uml_class_diagram}.png
 \begin{figure}[h]
     \centering
-    \includegraphics[width=1\textwidth]{images/model/original_uml_class_diagram.png}
+    \includegraphics[width=1\textwidth]{model/original_uml_class_diagram.png}
     \caption{The original UML class diagram for the email system.}
     \label{fig:originalUMLClassDiagram}
 \end{figure}
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=1\textwidth]{images/model/database_friendly.png}
+    \includegraphics[width=1\textwidth]{model/database_friendly.png}
     \caption{The database model for the email system.}
     \label{fig:originalDatabaseModel}
 \end{figure}
@@ -84,7 +91,7 @@ To further examplify the database model we will also provide an instance of the 
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=1\textwidth]{images/model/instance.png}
+    \includegraphics[width=1\textwidth]{model/instance.png}
     \caption{An instance of the database model for the email system.}
     \label{fig:instanceDatabaseModel}
 \end{figure}
@@ -95,12 +102,13 @@ The following tools will be presented in this document:
 \begin{itemize}
     \item DBeaver Community (see section \ref{dbeaverCommunity})
     \item SQLiteStudio (see section \ref{sqliteStudio})
+    \item SQLite ERD (see section \ref{sqliteERD})
 \end{itemize}
 
 \section{DBeaver Community}
 \label{dbeaverCommunity}
 
-\subsection{Known Issues}
+\subsection{Relevant Known Issues}
 \label{dbeaverKnownIssues}
 
 \subsubsection{Bad Primary Key due to auto increment}
@@ -146,11 +154,12 @@ For more information on why this is the case see \cite{dbeaver_issue_18491}.
 \section{SQLiteStudio}
 \label{sqliteStudio}
 
-\subsection{Known Issues}
+\subsection{Relevant Known Issues}
 \label{sqliteStudioKnownIssues}
 
 \subsection{Common Problems}
 \label{sqliteStudioCommonProblems}
+% TODO: Usertests!
 
 \subsection{Implementation of the Database Model}
 \label{sqliteStudioImplementation}
@@ -177,6 +186,15 @@ SQLite ERD is an application that can be used to create Entity Relationship Diag
 
 The application supports any common file format for SQLite databases and the only requirement is that the file is a SQLite database of version 3.
 
+% TODO: include figure generated from sqlite-erd
+
+\section{Final Words}
+\label{finalWords}
+If you notice any issues or have any suggestions please submit a fix or write about them at 
+\url{https://github.com/Edwinexd/db-sqlite-tools/issues}.
+
+
+\pagebreak
 \bibliographystyle{plain}
 \bibliography{bibtex}
 \bibdata{bibtex}
