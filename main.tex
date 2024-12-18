@@ -1,5 +1,24 @@
 \documentclass[a4paper,10pt,oneside]{article}
 
+\usepackage{placeins}
+
+\makeatletter
+\AtBeginDocument{%
+  % Modifying section command to include FloatBarrier
+  \expandafter\renewcommand\expandafter\section\expandafter
+    {\expandafter\@fb@secFB\section}%
+  % Modifying subsection command to include FloatBarrier
+  \expandafter\renewcommand\expandafter\subsection\expandafter
+    {\expandafter\@fb@secFB\subsection}%
+  
+  \newcommand\@fb@secFB{\FloatBarrier
+    \gdef\@fb@afterHHook{\@fb@topbarrier \gdef\@fb@afterHHook{}}}%
+  
+  \g@addto@macro\@afterheading{\@fb@afterHHook}%
+  \gdef\@fb@afterHHook{}%
+}
+\makeatother
+
 \usepackage[english]{babel}
 
 \usepackage[T1]{fontenc}
@@ -73,14 +92,14 @@ In this document we will be using a simple database model which represents an em
 The original domain correct UML class diagram can be seen in figure \ref{fig:originalUMLClassDiagram}. And the corresponding database model can be seen in figure \ref{fig:originalDatabaseModel}. This document will not go into details on how or why the database model is created this way but rather focus on how to use the SQLite Modelling Tools to implement the database model. For details on how to go to a RDBMS friendly model from a domain model see lecture slides and literature.
 
 % model/{database_friendly, instance, original_uml_class_diagram}.png
-\begin{figure}[h]
+\begin{figure}[htb]
     \centering
     \includegraphics[width=1\textwidth]{model/original_uml_class_diagram.png}
     \caption{The original UML class diagram for the email system.}
     \label{fig:originalUMLClassDiagram}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[htb]
     \centering
     \includegraphics[width=1\textwidth]{model/database_friendly.png}
     \caption{The database model for the email system.}
@@ -89,7 +108,7 @@ The original domain correct UML class diagram can be seen in figure \ref{fig:ori
 
 To further examplify the database model we will also provide an instance of the database model in figure \ref{fig:instanceDatabaseModel}. This instance will be used in the examples below to show how to insert data using the SQLite Implementation Tools.
 
-\begin{figure}[h]
+\begin{figure}[htb]
     \centering
     \includegraphics[width=1\textwidth]{model/instance.png}
     \caption{An instance of the database model for the email system.}
@@ -100,9 +119,9 @@ To further examplify the database model we will also provide an instance of the 
 \label{sqliteImplementationTools}
 The following tools will be presented in this document:
 \begin{itemize}
-    \item DBeaver Community (see section \ref{dbeaverCommunity})
-    \item SQLiteStudio (see section \ref{sqliteStudio})
-    \item SQLite ERD (see section \ref{sqliteERD})
+    \item DBeaver Community (see \autoref{dbeaverCommunity})
+    \item SQLiteStudio (see \autoref{sqliteStudio})
+    \item SQLite ERD (see \autoref{sqliteERD})
 \end{itemize}
 
 \section{DBeaver Community}
