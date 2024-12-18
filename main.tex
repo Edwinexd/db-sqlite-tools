@@ -32,6 +32,7 @@
 \usepackage{ifthen}
 \usepackage{listings}
 \usepackage{xcolor}
+\usepackage{blindtext} % https://tex.stackexchange.com/questions/111948/what-is-a-overfull-hbox-9-89561pt-too-wide
 
 \usepackage{helvet} % Add sans-serif font package
 \renewcommand{\familydefault}{\sfdefault} % Set sans-serif as default
@@ -68,6 +69,9 @@
 \begin{document}
 
 \maketitle \pagebreak
+
+% https://tex.stackexchange.com/questions/111948/what-is-a-overfull-hbox-9-89561pt-too-wide
+\begin{sloppypar}  
 
 \tableofcontents \pagebreak
 
@@ -358,7 +362,6 @@ The process of creating the MailGoesTo table is almost identical to the \autoref
 \section{SQLite ERD}
 \label{sqliteERD}
 SQLite ERD is an application that can be used to create Entity Relationship Diagrams (ERDs) for SQLite databases. The application is platform independent and is used within a web browser. The application can be found at \url{https://sqlite-erd.e-su.se/}. For the interested reader the source code can be found at \url{https://github.com/Edwinexd/sqlite-erd}.
-
 The application supports most common file formats for SQLite databases, only requiring that the file is a SQLite database of version 3.
 
 % TODO: include figure generated from sqlite-erd
@@ -373,4 +376,5 @@ If you have any questions or issues with the tools presented in this document or
 \bibliography{bibtex}
 \bibdata{bibtex}
 
+\end{sloppypar}
 \end{document}
