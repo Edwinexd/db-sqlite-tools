@@ -155,6 +155,7 @@ For more information on why this is the case see \cite{dbeaver_issue_18491}.
 \label{dbeaverCommonProblems}
 
 \subsubsection{Foreign Key Constraints are not enforced}
+\label{dbeaverForeignKeysNotEnforced}
 DBeaver does not enforce foreign key constraints by default. This can either be enabled when creating a new database (see \autoref{dbeaverCreatingDatabase}) or by editing the database connection settings as follows:
 \begin{enumerate}
     \item Right-click on the connection and choose ``Edit Connection''. (\autoref{fig:edit_connection})
@@ -184,6 +185,11 @@ DBeaver does not enforce foreign key constraints by default. This can either be 
   \label{fig:edit_foreign_keys_enable}
 \end{figure}
 
+% TODO!!!
+\subsubsection{ERD Created Foreign Key Constraints}
+\label{dbeaverERDCreatedForeignKeys}
+
+% they are not real / do not use them
 
 % \subsection{Implementation of the Database Model}
 % \label{dbeaverImplementation}
@@ -313,22 +319,155 @@ The process of creating the MailGoesTo table is almost identical to the \autoref
 
 \begin{figure}[!htb]
   \centering
-  \includegraphics[width=0.8\textwidth]{dbeaver/mail_goes_to_er_diagram.png}
+  \includegraphics[width=0.7\textwidth]{dbeaver/mail_goes_to_er_diagram.png}
   \caption{MailGoesTo ER Diagram in DBeaver.}
   \label{fig:mail_goes_to_er_diagram}
 \end{figure}
 
+\subsection{Alternative Keys}
+\label{dbeaverAlternativeKeys}
+To create an alternative key (unique index) in DBeaver this can be exemplified on User by declaring that the columns ``fullName'' and ``phoneNumber'' should be unique together. This can be done as follows:
+
+\begin{enumerate}
+  \item Navigate to the ``Indexes'' tab in the User table (\autoref{fig:user_index_tab}).
+  \item Right-click and choose ``Create New Index''.
+  \item Select the columns ``fullName'' and ``phoneNumber'', tick the box for ``Unique'' and press ``OK''. (\autoref{fig:user_index_create})
+\end{enumerate}
+
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=0.7\textwidth]{dbeaver/user_index_tab.png}
+  \caption{Navigate to Indexes in DBeaver.}
+  \label{fig:user_index_tab}
+\end{figure}
+
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=0.7\textwidth]{dbeaver/user_index_create.png}
+  \caption{Create Unique Index in DBeaver.}
+  \label{fig:user_index_create}
+\end{figure}
 
 
 \subsection{Foreign Keys}
 \label{dbeaverForeignKeys}
+Creating foreign keys in DBeaver will be exemplified on the relationships between MailAddress.(createdBy) → User.(username) and MailGoesTo.(username, domain) → MailAddress.(username, domain).
+
+\subsubsection{MailAddress → User}
+\label{dbeaverUserMailAddressRelationship}
+A single column foreign key relationship between User.(username) and MailAddress.(createdBy), can be created as follows:
+
+\begin{enumerate}
+  \item Navigate to the ``Foreign Keys'' tab of the MailAddress table.
+  \item Right-click and choose ``Create New Foreign Key''. (\autoref{fig:navigate_create_foreign_key_tab}).
+  \item Set the destination / ``reference'' table to User, the ``from'' column to createdBy and the reference column to username. (\autoref{fig:create_foreign_key_mail_address_user}).
+  \item Set ``ON DELETE'' and ``ON UPDATE'' to appropriate values.
+  \item Press ``OK'' and save the table.
+\end{enumerate}
+
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=0.7\textwidth]{dbeaver/navigate_create_foreign_key_tab.png}
+  \caption{Navigate to Create Foreign Key in DBeaver.}
+  \label{fig:navigate_create_foreign_key_tab}
+\end{figure}
+
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=0.7\textwidth]{dbeaver/create_foreign_key_mail_address_user.png}
+  \caption{Create Foreign Key MailAddress → User in DBeaver.}
+  \label{fig:create_foreign_key_mail_address_user}
+\end{figure}
+
+
+
+\subsubsection{MailGoesTo → MailAddress}
+\label{dbeaverMailGoesToMailAddressRelationship}
+C composite foreign key relationship between MailGoesTo.(addressUsername, addressDomain) and MailAddress.(username, domain), can be created as follows:
+
+\begin{enumerate}
+  \item Navigate to the ``Foreign Keys'' tab of the MailGoesTo table.
+  \item Right-click and choose ``Create New Foreign Key''. (\autoref{fig:navigate_create_foreign_key_tab}).
+  \item Set the destination / ``reference'' table to MailAddress, the ``from'' columns to username and domain and the reference columns to username and domain. (\autoref{fig:create_foreign_key_mail_goes_to_mail_address}).
+  \item Set ``ON DELETE'' and ``ON UPDATE'' to appropriate values.
+  \item Press ``OK'' and save the table.
+\end{enumerate}
+
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=0.7\textwidth]{dbeaver/create_foreign_key_mail_goes_to_mail_address.png}
+  \caption{Create Foreign Key MailGoesTo → MailAddress in DBeaver.}
+  \label{fig:create_foreign_key_mail_goes_to_mail_address}
+\end{figure}
+
 
 \subsection{Inserting Data}
 \label{dbeaverInsertingData}
 
+We will now insert data into the User and MailAddress tables. The data to be inserted can be seen in \autoref{fig:instanceDatabaseModel}. The process for inserting data is the same for all tables and can be exemplified on the User table as follows:
+
+\begin{enumerate}
+  \item Navigate to the ``Data'' tab of the User table.
+  \item Right-click, choose ``Edit'' and then ``Add Row''. (\autoref{fig:insert_data_user})
+  \item Fill out the data for the columns. (\autoref{fig:insert_data_user_populated})
+  \item Press ``Ctrl + S'' (or your operating system's equivalent) to save the data.
+\end{enumerate}
+
+For foreign key relationships, referencial integrity will be enforced assuming the foreign key constraints are enabled (see \autoref{dbeaverCreatingDatabase} or \autoref{dbeaverForeignKeysNotEnforced}).
+
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=0.7\textwidth]{dbeaver/insert_data_user.png}
+  \caption{Insert Data into User in DBeaver.}
+  \label{fig:insert_data_user}
+\end{figure}
+
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=0.7\textwidth]{dbeaver/insert_data_user_populated.png}
+  \caption{Bob User Populated in DBeaver.}
+  \label{fig:insert_data_user_populated}
+\end{figure}
+
+
 \subsection{Querying Data}
 \label{dbeaverQueryingData}
 
+Queries can be written and executed using the views section in DBeaver. The following query will return all columns from the User table where the users full name is ``bob stevensson''.
+
+\begin{lstlisting}[caption={Querying Data in DBeaver}]
+SELECT * FROM User, MailAddress WHERE User.username = MailAddress.createdBy AND User.fullName = 'bob stevensson';
+\end{lstlisting}
+
+And the process for doing this in DBeaver is as follows:
+\begin{enumerate}
+  \item Right-click on ``Views'' and choose ``Create New View''. (\autoref{fig:create_view})
+  \item Give the view a name and navgiate to definition and write the query. (\autoref{fig:view_bob_emails_define})
+  \item Press ``Ctrl + S'' (or your operating system's equivalent) to save the view.
+  \item Navigate to the ``Data'' tab of the view to see the result. (\autoref{fig:view_bob_emails_result})
+\end{enumerate}
+
+
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=0.7\textwidth]{dbeaver/create_view.png}
+  \caption{}
+  \label{fig:create_view}
+\end{figure}
+
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=0.7\textwidth]{dbeaver/view_bob_emails_define.png}
+  \caption{}
+  \label{fig:view_bob_emails_define}
+\end{figure}
+
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=0.8\textwidth]{dbeaver/view_bob_emails_result.png}
+  \caption{}
+  \label{fig:view_bob_emails_result}
+\end{figure}
 
 \section{SQLiteStudio}
 \label{sqliteStudio}
@@ -340,22 +479,34 @@ The process of creating the MailGoesTo table is almost identical to the \autoref
 \label{sqliteStudioCommonProblems}
 % TODO: Usertests!
 
-\subsection{Implementation of the Database Model}
-\label{sqliteStudioImplementation}
+% \subsection{Implementation of the Database Model}
+% \label{sqliteStudioImplementation}
 
-\subsubsection{Creating a Database}
+\subsection{Creating a Database}
 \label{sqliteStudioCreatingDatabase}
 
-\subsubsection{Creating a Table}
+\subsection{Creating a Table}
 \label{sqliteStudioCreatingTable}
 
-\subsubsection{Foreign Keys}
+\subsubsection{User Table}
+\label{sqliteStudioUserTable}
+
+\subsubsection{MailAddress Table}
+\label{sqliteStudioMailAddressTable}
+
+\subsubsection{MailGoesTo Table}
+\label{sqliteStudioMailGoesToTable}
+
+\subsection{Alternative Keys}
+\label{sqliteStudioAlternativeKeys}
+
+\subsection{Foreign Keys}
 \label{sqliteStudioForeignKeys}
 
-\subsubsection{Inserting Data}
+\subsection{Inserting Data}
 \label{sqliteStudioInsertingData}
 
-\subsubsection{Querying Data}
+\subsection{Querying Data}
 \label{sqliteStudioQueryingData}
 % queries should be saved as Views
 

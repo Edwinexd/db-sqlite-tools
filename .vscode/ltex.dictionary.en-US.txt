@@ -6,3 +6,6 @@ MailAddress
 MailGoesTo
 fullName
 phoneNumber
+createdBy
+addressUsername
+addressDomain
