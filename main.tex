@@ -1,5 +1,5 @@
 % LTeX: enabled=false
-\documentclass[a4paper,10pt,oneside]{article}
+\documentclass[a4paper,11pt,oneside]{article}
 
 \usepackage{placeins}
 
@@ -38,12 +38,8 @@
 
 \graphicspath{{images/}}
 
-\usepackage{ifpdf}
-\ifpdf
-	\usepackage[hidelinks]{hyperref}
-\else
-	\usepackage{url}
-\fi
+\usepackage[]{hyperref}
+\usepackage{url}
 
 
 
@@ -87,11 +83,13 @@
 
 % TODO: Don't write "we", "I" or "us".
 
+% TODO: Consistently use DBeaver Community or DBeaver, not both. (prob should be done with definition)
+
 \section{The Database Model}
 \label{exampleDatabaseModel}
 In this document we will be using a simple database model which represents an email system, where users are able to create multiple recipient addresses and receive all incoming emails to one or more inboxes. All inboxes can be shared with other users in the system and receiving email may optionally be encrypted with a provided public key (see \url{https://en.wikipedia.org/wiki/Public-key_cryptography}). 
 
-The original domain correct UML class diagram can be seen in figure \ref{fig:originalUMLClassDiagram}. And the corresponding database model can be seen in figure \ref{fig:originalDatabaseModel}. This document will not go into details on how or why the database model is created this way but rather focus on how to use the SQLite Modelling Tools to implement the database model. For details on how to go to a RDBMS friendly model from a domain model see lecture slides and literature.
+The original domain correct UML class diagram can be seen in figure \autoref{fig:originalUMLClassDiagram}. And the corresponding database model can be seen in figure \autoref{fig:originalDatabaseModel}. This document will not go into details on how or why the database model is created this way but rather focus on how to use the SQLite Modelling Tools to implement the database model. For details on how to go to a RDBMS friendly model from a domain model see lecture slides and literature.
 
 % model/{database_friendly, instance, original_uml_class_diagram}.png
 \begin{figure}[htb]
@@ -108,7 +106,7 @@ The original domain correct UML class diagram can be seen in figure \ref{fig:ori
     \label{fig:originalDatabaseModel}
 \end{figure}
 
-To further exemplify the database model we will also provide an instance of the database model in figure \ref{fig:instanceDatabaseModel}. This instance will be used in the examples below to show how to insert data using the SQLite Implementation Tools.
+To further exemplify the database model we will also provide an instance of the database model in figure \autoref{fig:instanceDatabaseModel}. This instance will be used in the examples below to show how to insert data using the SQLite Implementation Tools.
 
 \begin{figure}[htb]
     \centering
@@ -151,24 +149,180 @@ For more information on why this is the case see \cite{dbeaver_issue_18491}.
 
 \subsection{Common Problems}
 \label{dbeaverCommonProblems}
-% TODO: Usertests!
 
-\subsection{Implementation of the Database Model}
-\label{dbeaverImplementation}
+\subsubsection{Foreign Key Constraints are not enforced}
+DBeaver does not enforce foreign key constraints by default. This can either be enabled when creating a new database (see \autoref{dbeaverCreatingDatabase}) or by editing the database connection settings as follows:
+\begin{enumerate}
+    \item Right-click on the connection and choose ``Edit Connection''. (\autoref{fig:edit_connection})
+    \item Go to ``Connection settings'' → ``Driver properties'' (\autoref{fig:edit_driver_properties}).
+    \item Locate and change ``Foreign keys'' to ``true'' (\autoref{fig:edit_foreign_keys_enable}).
+    \item Press ``OK'' and reconnect if necessary.
+\end{enumerate}
 
-\subsubsection{Creating a Database}
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=0.7\textwidth]{dbeaver/edit_connection.png}
+  \caption{Edit Connection in DBeaver.}
+  \label{fig:edit_connection}
+\end{figure}
+
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=0.7\textwidth]{dbeaver/edit_driver_properties.png}
+  \caption{Driver Properties in DBeaver.}
+  \label{fig:edit_driver_properties}
+\end{figure}
+
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=0.7\textwidth]{dbeaver/edit_foreign_keys_enable.png}
+  \caption{Enable Foreign Keys in DBeaver.}
+  \label{fig:edit_foreign_keys_enable}
+\end{figure}
+
+
+% \subsection{Implementation of the Database Model}
+% \label{dbeaverImplementation}
+
+\subsection{Creating Databases}
 \label{dbeaverCreatingDatabase}
+To create a new database with foreign key constraints enabled in DBeaver Community:
+\begin{enumerate}
+    \item Press ``New Database Connection'' (\autoref{fig:new_database_connection}).
+    \item Choose SQLite, press ``Next''. (\autoref{fig:new_database_sqlite})
+    \item Choose a file location for the database with ``Create...'' ensure to name the file with the extension ``.db3'' or ``.sqlite3'' (\autoref{fig:create_choose_file_location}).
+    \item Go to ``Driver Properties'' and change ``Foreign keys'' to ``true'' (\autoref{fig:create_foreign_keys_enable}).
+    \item Press ``Finish''.
+\end{enumerate}
 
-\subsubsection{Creating a Table}
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=0.7\textwidth]{dbeaver/new_database_connection.png}
+  \caption{New Database Connection in DBeaver.}
+  \label{fig:new_database_connection}
+\end{figure}
+
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=0.7\textwidth]{dbeaver/new_database_sqlite.png}
+  \caption{New SQLite Database in DBeaver.}
+  \label{fig:new_database_sqlite}
+\end{figure}
+
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=0.7\textwidth]{dbeaver/create_choose_file_location.png}
+  \caption{Choose File Location in DBeaver.}
+  \label{fig:create_choose_file_location}
+\end{figure}
+
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=0.7\textwidth]{dbeaver/create_foreign_keys_enable.png}
+  \caption{Enable Foreign Keys in DBeaver.}
+  \label{fig:create_foreign_keys_enable}
+\end{figure}
+
+
+
+\subsection{Creating Tables}
 \label{dbeaverCreatingTable}
+% TODO: and breifly mention MailGoesTo table
+From the database model, we will be implementing the User and the MailAddress tables. The rest of the tables can be implemented similarly and is left as an exercise for the reader.
 
-\subsubsection{Foreign Keys}
+\subsubsection{User Table}
+\label{dbeaverUserTable}
+
+\begin{enumerate}
+  \item \label{dbeaverCreateTable} Expand the database connection and right-click on ``Tables'' and choose ``Create New Table'' (\autoref{fig:create_new_table}).
+  \item Fill out the Table Name field, navigate to the ``Columns'' tab, right click and choose ``Add Column'' (\autoref{fig:name_and_add_column}).
+  \item \label{dbeaverAddColumn} Add the column for username, set the datatype to ``TEXT'', check the box for ``Not Null'' and the box for ``Unique'' in order to create a single column primary key (\autoref{fig:username_primary_key}).
+  \item Repeat step \ref{dbeaverAddColumn} for the columns ``fullName'' and ``phoneNumber'' but without checking the box for ``Unique''.
+  \item Save with ``Ctrl + S'' (or your operating system's equivalent) and press ``Execute''.
+  \item The resulting table can be visualized using DBeaver's built in ER Diagram tool (\autoref{fig:user_er_diagram}). 
+\end{enumerate}
+
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=0.7\textwidth]{dbeaver/create_new_table.png}
+  \caption{Create New Table in DBeaver.}
+  \label{fig:create_new_table}
+\end{figure}
+
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=0.7\textwidth]{dbeaver/name_and_add_column.png}
+  \caption{Add Column in DBeaver.}
+  \label{fig:name_and_add_column}
+\end{figure}
+
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=0.7\textwidth]{dbeaver/username_primary_key.png}
+  \caption{Username Primary Key in DBeaver.}
+  \label{fig:username_primary_key}
+\end{figure}
+
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=0.7\textwidth]{dbeaver/user_er_diagram.png}
+  \caption{User ER Diagram in DBeaver.}
+  \label{fig:user_er_diagram}
+\end{figure}
+
+
+\subsubsection{MailAddress Table}
+\label{dbeaverMailAddressTable}
+The process for creating the MailAddress table is similar to the User table with the exception that the \textbf{primary key} is a composite key. The PK for the table consists of the columns ``username'' and ``domain''. Steps for creating columns are the same as for \ref{dbeaverUserTable}, creating the composite key is done as follows:
+\begin{enumerate}
+  \item Navigate to the ``Keys'' tab (\autoref{fig:table_keys_navigate}).
+  \item Right click, choose ``Create New Key''
+  \item Set the type to ``Primary Key'' and tick the columns ``username'' and ``domain'' to the key (\autoref{fig:mail_address_primary_key}).
+  \item Press ``OK'' and save the table.
+  \item The resulting table can be visualized using DBeaver's built in ER Diagram tool. (\autoref{fig:mail_address_er_diagram})
+\end{enumerate}
+
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=0.7\textwidth]{dbeaver/table_keys_navigate.png}
+  \caption{Navigate to Keys in DBeaver.}
+  \label{fig:table_keys_navigate}
+\end{figure}
+
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=0.7\textwidth]{dbeaver/mail_address_primary_key.png}
+  \caption{MailAddress Primary Key in DBeaver.}
+  \label{fig:mail_address_primary_key}
+\end{figure}
+
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=0.7\textwidth]{dbeaver/mail_address_er_diagram.png}
+  \caption{MailAddress ER Diagram in DBeaver.}
+  \label{fig:mail_address_er_diagram}
+\end{figure}
+
+\subsubsection{MailGoesTo Table}
+\label{dbeaverMailGoesToTable}
+The process of creating the MailGoesTo table is almost identical to the \autoref{dbeaverMailAddressTable} with the exception that all columns are part of the primary key. The resulting table can be visualized with DBeaver as \autoref{fig:mail_goes_to_er_diagram}.
+
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=0.8\textwidth]{dbeaver/mail_goes_to_er_diagram.png}
+  \caption{MailGoesTo ER Diagram in DBeaver.}
+  \label{fig:mail_goes_to_er_diagram}
+\end{figure}
+
+
+
+\subsection{Foreign Keys}
 \label{dbeaverForeignKeys}
 
-\subsubsection{Inserting Data}
+\subsection{Inserting Data}
 \label{dbeaverInsertingData}
 
-\subsubsection{Querying Data}
+\subsection{Querying Data}
 \label{dbeaverQueryingData}
 
 
@@ -205,7 +359,7 @@ For more information on why this is the case see \cite{dbeaver_issue_18491}.
 \label{sqliteERD}
 SQLite ERD is an application that can be used to create Entity Relationship Diagrams (ERDs) for SQLite databases. The application is platform independent and is used within a web browser. The application can be found at \url{https://sqlite-erd.e-su.se/}. For the interested reader the source code can be found at \url{https://github.com/Edwinexd/sqlite-erd}.
 
-The application supports most common file formats for SQLite databases and the only requirement is that the file is a SQLite database of version 3.
+The application supports most common file formats for SQLite databases, only requiring that the file is a SQLite database of version 3.
 
 % TODO: include figure generated from sqlite-erd
 

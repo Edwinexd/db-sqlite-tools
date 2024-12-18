@@ -2,3 +2,7 @@ ERDs
 SQLiteStudio
 DBeaver
 Sundberg
+MailAddress
+MailGoesTo
+fullName
+phoneNumber
