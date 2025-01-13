@@ -151,6 +151,7 @@ CREATE TABLE GoodPK (
 \end{lstlisting}
 For more information on why this is the case see \cite{dbeaver_issue_18491}.
 
+
 \subsection{Common Problems}
 \label{dbeaverCommonProblems}
 
@@ -185,11 +186,14 @@ DBeaver does not enforce foreign key constraints by default. This can either be 
   \label{fig:edit_foreign_keys_enable}
 \end{figure}
 
-% TODO!!!
 \subsubsection{ERD Created Foreign Key Constraints}
 \label{dbeaverERDCreatedForeignKeys}
+The ERD tool in DBeaver Community allows you to drag tables/columns to create ``virtual keys'' which are not saved in the database itself - per the DBeaver documentation:
+``Note: Virtual keys exist only in DBeaver, not in the database itself. You can define these keys even if your database does not support them.''. \cite{dbeaver_virtual_keys} So do not rely on the ERD tool to create foreign key constraints in the database itself, instead follow the steps outlined in \autoref{dbeaverForeignKeys}.
 
-% they are not real / do not use them
+\subsubsection{Editing a Column}
+\label{dbeaverEditingColumn}
+It is not possible to change a columns datatype/NULL constraint/etc. after creation in DBeaver Community. The only way to change a column is to create a new column with the desired properties, copy the data (if applicable) over and subsequently delete the old column.
 
 % \subsection{Implementation of the Database Model}
 % \label{dbeaverImplementation}
