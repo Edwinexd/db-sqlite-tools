@@ -92,6 +92,7 @@
 \section{The Database Model}
 \label{exampleDatabaseModel}
 In this document we will be using a simple database model which represents an email system, where users are able to create multiple recipient addresses and receive all incoming emails to one or more inboxes. All inboxes can be shared with other users in the system and receiving email may optionally be encrypted with a provided public key (see \url{https://en.wikipedia.org/wiki/Public-key_cryptography}). 
+% TODO: Use cite for url instead
 
 The original domain correct UML class diagram can be seen in figure \autoref{fig:originalUMLClassDiagram}. And the corresponding database model can be seen in figure \autoref{fig:originalDatabaseModel}. This document will not go into details on how or why the database model is created this way but rather focus on how to use the SQLite Modelling Tools to implement the database model. For details on how to go to a RDBMS friendly model from a domain model see lecture slides and literature.
 
@@ -478,10 +479,35 @@ And the process for doing this in DBeaver is as follows:
 
 \subsection{Relevant Known Issues}
 \label{sqliteStudioKnownIssues}
+Nothing to note at this time!
 
 \subsection{Common Problems}
 \label{sqliteStudioCommonProblems}
-% TODO: Usertests!
+
+\subsubsection{Table Not Saved}
+\label{sqliteStudioTableNotSaved}
+When creating a table in SQLiteStudio the table is not saved until the changes are persisted and progress might be discarded if another table / tab is accessed before saving. This can be mitigated by saving the table directly after creation via ``Ctrl + S'' (or your operating system's equivalent).
+
+\subsubsection{No Primary Key}
+\label{sqliteStudioNoPrimaryKey}
+While creating a table in SQLiteStudio it is possible to create a table without explcitly defining a primary key (this is due to how SQLite handles primary keys). This is not an error but all tables should have an explicit primary key defined.
+
+
+% warning wrong datatype on FN (this is a logical error!)
+\subsubsection{Wrong Datatype for Foreign Key}
+\label{sqliteStudioWrongDatatypeForeignKey}
+When creating a foreign key in SQLiteStudio where the datatype of the foreign key column is not the same as the column in the referenced table the program will display a warning. This is usually a logical error and should not be ignored and the datatype in the from or to column should be changed to match. The warning can be seen in \autoref{fig:badfndatatype}.
+
+
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=0.8\textwidth]{sqlitestudio/badfndatatype.png}
+  \caption{Wrong Datatype for Foreign Key Column in SQLiteStudio.}
+  \label{fig:badfndatatype}
+\end{figure}
+
+
+
 
 % \subsection{Implementation of the Database Model}
 % \label{sqliteStudioImplementation}
@@ -503,6 +529,7 @@ And the process for doing this in DBeaver is as follows:
 
 \subsection{Alternative Keys}
 \label{sqliteStudioAlternativeKeys}
+% composite must be shown
 
 \subsection{Foreign Keys}
 \label{sqliteStudioForeignKeys}
@@ -527,7 +554,7 @@ If you have any questions or issues with the tools presented in this document or
 
 
 \pagebreak
-\bibliographystyle{plain}
+\bibliographystyle{IEEEtran}
 \bibliography{bibtex}
 \bibdata{bibtex}
 
