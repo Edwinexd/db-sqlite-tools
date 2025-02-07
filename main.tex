@@ -55,7 +55,8 @@
   keywordstyle=\color{blue},
   stringstyle=\color{red},
   commentstyle=\color{green},
-  captionpos=b % This sets the caption below the listing
+  captionpos=b, % This sets the caption below the listing
+  showstringspaces=false
 }
 
 % LTeX: enabled=true
@@ -441,7 +442,14 @@ For foreign key relationships, referencial integrity will be enforced assuming t
 Queries can be written and executed using the views section in DBeaver. The following query will return all columns from the User table where the users full name is ``bob stevensson''.
 
 \begin{lstlisting}[caption={Querying Data in DBeaver}]
-SELECT * FROM User, MailAddress WHERE User.username = MailAddress.createdBy AND User.fullName = 'bob stevensson';
+SELECT
+  *
+FROM
+  User,
+  MailAddress
+WHERE
+  User.username = MailAddress.createdBy
+  AND User.fullName = 'bob stevensson';
 \end{lstlisting}
 
 And the process for doing this in DBeaver is as follows:
