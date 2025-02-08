@@ -1,0 +1,1 @@
+By contributing to this repository/compendium, you agree to the terms laid out in the [LICENSE.md](LICENSE.md) file. If you do not agree with these terms, do not contribute to this repository/compendium.
