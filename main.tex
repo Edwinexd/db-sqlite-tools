@@ -159,7 +159,7 @@ For more information on why this is the case see \cite{dbeaver_issue_18491}.
 
 \subsubsection{Foreign Key Constraints are not enforced}
 \label{dbeaverForeignKeysNotEnforced}
-DBeaver does not enforce foreign key constraints by default. This can either be enabled when creating a new database (see \autoref{dbeaverCreatingDatabase}) or by editing the database connection settings as follows:
+DBeaver des not enforce foreign key constraints by default. This can either be enabled when creating a new database (see \autoref{dbeaverCreatingDatabase}) or by editing the database connection settings as follows:
 \begin{enumerate}
     \item Right-click on the connection and choose ``Edit Connection''. (\autoref{fig:edit_connection})
     \item Go to ``Connection settings'' → ``Driver properties'' (\autoref{fig:edit_driver_properties}).
@@ -522,12 +522,18 @@ When creating a foreign key in SQLiteStudio where the datatype of the foreign ke
 
 \subsection{Creating a Database}
 \label{sqliteStudioCreatingDatabase}
+To create a database in SQLiteStudio start by pressing the button Database in the top left corner. After that you will get this pop up
+%TODO: IMAGE START POPUP
+%TODO: Finns ett bättre sätt att göra detta på?
+Select create a new database. The textfield under the path to where you want to store your databse, click on the folder next to it and navigate to the folder you want to store your databse in. I suggest creating a folder in documents to store the database in. After selecting your folder you should enter the filename as EXAMPLE.db, as you can see I called it mail.db  The name textfield is where you enter the name of your database. After that you can press OK and your database will be created. The database will apper in left under "Databases".
 
 \subsection{Creating a Table}
 \label{sqliteStudioCreatingTable}
+To create a table in SQLiteStudio star by clicking in your database to get tables and views. Then right click on the tables and selected create new table. In this sectioon we will create the User table and the MailAddress table. The rest of the tables can be created in a similar way, and are as such left as an exercise for the reader.
 
 \subsubsection{User Table}
 \label{sqliteStudioUserTable}
+After selecting create new table you will be presented with a blank table you start by entering the name, this is going to be the user table. At the top of the user table all options will be greyed out execpt for "commit structure changes" and "add column". Press add column. You will be presented with the window to create a column. The first column we will create is the username column. The name of the column is username and we select the datatype from the list next to the name of the column. We will make it the primary key and set it to Not Null by checking the boxes. Now you can press "Commit structure changes" to save the table. Then you will get a window with a sql query that will be executed to create the table, you don't need to do anything here just press OK. You can repeat this process for the rest of the columns in the User table.  
 
 \subsubsection{MailAddress Table}
 \label{sqliteStudioMailAddressTable}
