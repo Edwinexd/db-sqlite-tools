@@ -492,6 +492,11 @@ Nothing to note at this time!
 \subsection{Common Problems}
 \label{sqliteStudioCommonProblems}
 
+\subsection {My table disapered}
+\label{sqliteStudioTableDisapered}
+sqliteStudio has each table in its own tab, if you acedently go to a new table and your old one disapered from view check the tabs at the bottom of the screen.
+%TODO: bild finns men måste in
+
 \subsubsection{Table Not Saved}
 \label{sqliteStudioTableNotSaved}
 When creating a table in SQLiteStudio the table is not saved until the changes are persisted and progress might be discarded if another table / tab is accessed before saving. This can be mitigated by saving the table directly after creation via ``Ctrl + S'' (or your operating system's equivalent).
@@ -529,22 +534,24 @@ Select create a new database. The textfield under the path to where you want to 
 
 \subsection{Creating a Table}
 \label{sqliteStudioCreatingTable}
-To create a table in SQLiteStudio star by clicking in your database to get tables and views. Then right click on the tables and selected create new table. In this sectioon we will create the User table and the MailAddress table. The rest of the tables can be created in a similar way, and are as such left as an exercise for the reader.
+To create a table in SQLiteStudio star by clicking in your database to get tables and views. Then right click on the tables and selected create new table. In this sectioon we will create the User table and the MailAddress table. The rest of the tables can be created in a similar way, and are as such left as an exercise for the reader. We will only cover the creation of the primary keys of User and MailAddress Tables becuse the rest of the columns are created in a similar way, you just dont enter them as a primary key.
 
 \subsubsection{User Table}
 \label{sqliteStudioUserTable}
-After selecting create new table you will be presented with a blank table you start by entering the name, this is going to be the user table. At the top of the user table all options will be greyed out execpt for "commit structure changes" and "add column". Press add column. You will be presented with the window to create a column. The first column we will create is the username column. The name of the column is username and we select the datatype from the list next to the name of the column. We will make it the primary key and set it to Not Null by checking the boxes. Now you can press "Commit structure changes" to save the table. Then you will get a window with a sql query that will be executed to create the table, you don't need to do anything here just press OK. You can repeat this process for the rest of the columns in the User table.  
+After selecting create new table you will be presented with a blank table you start by entering the name, this is going to be the user table. At the top of the user table all options will be greyed out execpt for "commit structure changes" and "add column". Press add column. You will be presented with the window to create a column. The first column we will create is the username column. The name of the column is username and we select the datatype from the list next to the name of the column. We will make it the primary key and set it to Not Null by checking the boxes. Now you can press "Commit structure changes" to save the table. Then you will get a window with a sql query that will be executed to create the table, you don't need to do anything here just press OK. You can repeat the steaps from adding the username column to add the fullName and phoneNumber columns.   
 
 \subsubsection{MailAddress Table}
 \label{sqliteStudioMailAddressTable}
-
+MailAddress table is created in the same way as the User table. The only difference is that the primary key is a composite key. The primary key is the username and domain columns. We will start with the same steps and creating a new table as we did with the User table. After that we will add the username and domain columns, checking both as Not null but importantly not as a primary key! The table will look like the one in the image below. In the items on the bottom of the table view you can see a key icon, press this button. You will be presented with a window where you can select the columns that should be part of the primary key. Select the username and domain columns. You can and should (for now) ignore the rest of the options in the window. Press create and then press "Commit structure changes" to save the table. After that you can create the rest of the columns in the same way as you did with the User table.
+%Ett till subsubsection för FN?
+If you got a key eye for UML diagrams you can see that username is foerign key in MailAddress table, foreign keys will be covered later under the chapter Foreign Keys.  
 \subsubsection{MailGoesTo Table}
 \label{sqliteStudioMailGoesToTable}
-
+%TODO: Döda dena subsection
 \subsection{Alternative Keys}
 \label{sqliteStudioAlternativeKeys}
 % composite must be shown
-
+Alternative keys 
 \subsection{Foreign Keys}
 \label{sqliteStudioForeignKeys}
 
