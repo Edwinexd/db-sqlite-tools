@@ -547,14 +547,15 @@ MailAddress table is created in the same way as the User table. The only differe
 If you got a key eye for UML diagrams you can see that username is foerign key in MailAddress table, foreign keys will be covered later under the chapter Foreign Keys.  
 \subsubsection{MailGoesTo Table}
 \label{sqliteStudioMailGoesToTable}
-%TODO: Döda dena subsection
+MailGoesTo is table created to handle a many to many relationship between inbox and MailAddress tables. This means both of it keys will be foreign keys to other tables. You don't have to worry about foreign keys as they will be covered in more detail later. As the rules on creating a table for a many to many relationship the primary keys in MailGoesTo will the primary keys of Inbox and MailAddress. Nothing new will be covered in this section, as such this will be left as an exercise. After creating the table it should look like the one in the image below. 
 \subsection{Alternative Keys}
 \label{sqliteStudioAlternativeKeys}
 % composite must be shown
-Alternative keys 
+To create a alternative key in SQLiteStudio you can press the three couluored squares. After which you will be presented with a window where you can select the columns that should be part of the alternative key. To demonstrate we will create a composite key of the columns fullName and phoneNumber in the User table. After selecting the columns you can press the key icon to create the key. You can se that the alternative is created in the area below the table view.
 \subsection{Foreign Keys}
 \label{sqliteStudioForeignKeys}
-
+Foreign keys are created in a similar way as alternative keys. Inbetween the primary key icon and three squares there is a picture of two tables with a link between them, press this button. The window will allow you to select a foreign table and the columns that should be part of the foreign key. We will create a foreign key between the username column in MailAddress and the username column in User. After selecting you local column you can enter what it corresponds to by selecting it in the drop down list across.  You can also set reaction incase the key it refrerencing is deleted or updated T.ex a person changes their username. Set the behaviour to what is appropriate for your case. Then press create and the foreign key will be created. In MailGoesTo we have to foreign keys and have to create a composite key with both keys. Follow the same steps as previously    
+In MailGoesTo we have to foreign keys and have to create a composite key with both keys. Follow the same steps as previously with the difference that you select both columns instead of just one. After that you simply press create and the foreign key will be created.
 \subsection{Inserting Data}
 \label{sqliteStudioInsertingData}
 
