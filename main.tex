@@ -568,7 +568,7 @@ In this sectioon we will create the User table and the MailAddress table. The re
 
 \subsubsection{User Table}
 \label{sqliteStudioUserTable}
-After selecting create new table you will be presented with a blank table,se \autoref{fig:CreateTableBlanktable} you start by entering the name, this is going to be the user table.
+After selecting create new table you will be presented with a blank table,see \autoref{fig:CreateTableBlanktable} you start by entering the name, this is going to be the user table.
 \begin{figure}[!htb]
   \centering
   \includegraphics[width=0.7\textwidth]{sqlitestudio/create_table/create_table_blank.png}
@@ -582,7 +582,7 @@ At the top of the user table all options will be greyed out execpt for ``commit 
   \caption{Blank menu for creating a new column in SQLiteStudio.}
   \label{fig:BlankNewColumn}
 \end{figure}
-The first column we will create is the username column. The name of the column is username and then select the datatype from the list next to the name of the column. We will make it the primary key and set it to NOT NULL by checking the boxes ,\autoref{fig:FilledNewColumnUser}. 
+The first column we will create is the username column. The name of the column is username and then select the datatype from the list next to the name of the column. We will make it the primary key and set it to NOT NULL by checking the boxes, \autoref{fig:FilledNewColumnUser}. 
 \begin{figure}[!htb]
   \centering
   \includegraphics[width=0.7\textwidth]{sqlitestudio/create_user/create_user_column_populated.png}
@@ -622,7 +622,7 @@ MailGoesTo is table created to handle a many to many relationship between inbox 
 \end{figure}
 \subsection{Alternative Keys}
 \label{sqliteStudioAlternativeKeys}
-To create a alternative key in SQLiteStudio you press the button with three couluored squares,\autoref{fig:FindUniqueButton}. 
+To create a alternative key in SQLiteStudio you press the button with three couluored squares, \autoref{fig:FindUniqueButton}. 
 \begin{figure}[!htb]
   \centering
   \includegraphics[width=0.7\textwidth]{sqlitestudio/alternative_key/unique_symbol_square.png}
@@ -667,14 +667,14 @@ We will create a foreign key between the username column in MailAddress and the 
   \caption{Popup to create a foreign key}
   \label{fig:MailAddressForeignKeysDropDown}
 \end{figure}
-You can also set condition for if the key it refrerencing is deleted or updated, for example, a person changes their username. Set the behaviour to what is appropriate for your case, se \autoref{fig:MailAddressForeignKeysFilledWindow}. Then press create and the foreign key will be created.
+You can also set condition for if the key it refrerencing is deleted or updated, for example, a person changes their username. Set the behaviour to what is appropriate for your case, see \autoref{fig:MailAddressForeignKeysFilledWindow}. Then press create and the foreign key will be created.
 \begin{figure}[!htb]
   \centering
   \includegraphics[width=0.7\textwidth]{sqlitestudio/create_foreign_key/foreign_key_populated.png}
   \caption{Filled popup to create foreign key}
   \label{fig:MailAddressForeignKeysFilledWindow}
 \end{figure}   
-In MailGoesTo we have two columns that are part of the same foreign key and have to create a composite key with both columns. Follow the same steps as previously with the difference that you select both columns instead of just one, se \autoref{fig:MailAddressForeignKeysComposit}. After that press create and the foreign key will be created.
+In MailGoesTo we have two columns that are part of the same foreign key and have to create a composite key with both columns. Follow the same steps as previously with the difference that you select both columns instead of just one, see \autoref{fig:MailAddressForeignKeysComposit}. After that press create and the foreign key will be created.
 \begin{figure}[!htb]
   \centering
   \includegraphics[width=0.7\textwidth]{sqlitestudio/create_foreign_key/composite_foreign_key.png}
@@ -683,14 +683,14 @@ In MailGoesTo we have two columns that are part of the same foreign key and have
 \end{figure}   
 \subsection{Inserting Data}
 \label{sqliteStudioInsertingData}
-To insert data in SQLiteStudio you press the data button,\autoref{fig:insertdataFindDataView}, on the top of table view. 
+To insert data in SQLiteStudio you press the data button, \autoref{fig:insertdataFindDataView}, on the top of table view. 
 \begin{figure}[!htb]
   \centering
   \includegraphics[width=0.7\textwidth]{sqlitestudio/insert_data/insert_data_find_view.png}
   \caption{Table view för user table}
   \label{fig:insertdataFindDataView}
 \end{figure}
-After pressing it you will be presented with a data window, se \autoref{fig:insertdataDataViewBlank}.
+After pressing it you will be presented with a data window, see \autoref{fig:insertdataDataViewBlank}.
 \begin{figure}[!htb]
   \centering
   \includegraphics[width=0.7\textwidth]{sqlitestudio/insert_data/insert_data_view_blank.png}
@@ -725,14 +725,14 @@ Using CREATE VIEW may be benefictial as it will save your queries. After pressin
 \end{figure} 
 After you have written your query you can press the green checkmark to save the view. 
 
-To see the result you need to enter into data view, se \autoref{fig:Resultsquery}.
+To see the result you need to enter into data view, see \autoref{fig:Resultsquery}.
 \begin{figure}[!htb]
   \centering
   \includegraphics[width=0.7\textwidth]{sqlitestudio/queries/create_query_find_results.png}
   \caption{Results from the query} 
   \label{fig:Resultsquery}
 \end{figure} 
-All saved views will be shown in the view list right below your tables,\autoref{fig:Allviews}.  
+All saved views will be shown in the view list right below your tables, \autoref{fig:Allviews}.  
 \begin{figure}[!htb]
   \centering
   \includegraphics[width=0.7\textwidth]{sqlitestudio/queries/create_query_find_views.png}
