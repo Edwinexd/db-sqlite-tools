@@ -495,7 +495,6 @@ Nothing to note at this time!
 \subsection {My table disapered}
 \label{sqliteStudioTableDisapered}
 sqlitestudio has each table in its own tab, if you acedently go to a new table and your old one disapered from view. Check the tabs at the bottom of the screen.
-%TODO: Röd pil för att göra bilden meningsfull
 \begin{figure}[!htb]
   \centering
   \includegraphics[width=0.7\textwidth]{sqlitestudio/sqlitestudioimages/Commonproblem/CommonproblemsTableDisapered.png}
@@ -601,7 +600,6 @@ You can repeat the steaps from adding the username column to add the fullName an
 
 \subsubsection{MailAddress Table}
 \label{sqliteStudioMailAddressTable}
-%TODO: Mail type is not in de images REDO
 MailAddress table is created in the same way as the User table. The only difference is that the primary key is a composite key. It is both the username and domain columns. We will start with the same steps and creating a new table as we did with the User table. After that we will add the username and domain columns, checking both as Not null but importantly not as a primary key! The table will look like the one in the image below.
 \begin{figure}[!htb]
   \centering
@@ -609,7 +607,7 @@ MailAddress table is created in the same way as the User table. The only differe
   \caption{Created two columns in MailAddress table wich are not primary keys.} 
   \label{fig:MailAddressTableNoKeys}
 \end{figure}
-%TODO:Add a red arrow to the key icon
+
 In the items on the bottom of the table view you can see a key icon, press this button. You will be presented with a window where you can select the columns that should be part of the primary key. 
 \begin{figure}[!htb]
   \centering
@@ -617,7 +615,7 @@ In the items on the bottom of the table view you can see a key icon, press this 
   \caption{Menu for adding primary keys in MailAddress table.}
   \label{fig:MailAddressTablePrimaryKeys}
 \end{figure}
-Select the username and domain columns. You can and should (for now) ignore the rest of the options in the window. Press create and then press "Commit structure changes" to save the table. After that you can create the rest of the columns in the same way as you did with the User table. If you got a key eye for UML diagrams you can see that username is foerign key in MailAddress table, foreign keys will be covered later under the chapter Foreign Keys.  
+Select the username and domain columns. You can and should (for now) ignore the rest of the options in the window. Press create and then press "Commit structure changes" to save the table. After that you can create the rest of the columns in the same way as you did with the User table. If you got a key eye for UML diagrams you can see that username will be a foerign key in MailAddress table, foreign keys will be covered later under the chapter Foreign Keys.  
 \subsubsection{MailGoesTo Table}
 \label{sqliteStudioMailGoesToTable}
 MailGoesTo is table created to handle a many to many relationship between inbox and MailAddress tables. This means both of it keys will be foreign keys to other tables. You don't have to worry about foreign keys as they will be covered in more detail later. As the rules on creating a table for a many to many relationship the primary keys in MailGoesTo will the primary keys of Inbox and MailAddress. Nothing new will be covered in this section, as such this will be left as an exercise. After creating the table it should look like the one in the image below. 
@@ -629,7 +627,29 @@ MailGoesTo is table created to handle a many to many relationship between inbox 
 \end{figure}
 \subsection{Alternative Keys}
 \label{sqliteStudioAlternativeKeys}
-To create a alternative key in SQLiteStudio you can press the three couluored squares. After which you will be presented with a window where you can select the columns that should be part of the alternative key. To demonstrate we will create a composite key of the columns fullName and phoneNumber in the User table. After selecting the columns you can press the key icon to create the key. You can se that the alternative is created in the area below the table view.
+
+To create a alternative key in SQLiteStudio you can press the three couluored squares. 
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=0.7\textwidth]{sqlitestudio/sqlitestudioimages/CreateAN/AlternatveKeyTHreeSquare.png}
+  \caption{Finding the unique button in SQLiteStudio.}
+  \label{fig:FindUniqueButton}
+\end{figure}
+After which you will be presented with a window where you can select the columns that should be part of the alternative key.
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=0.7\textwidth]{sqlitestudio/sqlitestudioimages/CreateAN/AlternativeKeyBLANK.png}
+  \caption{Unique window in SQLitestudio.}
+  \label{fig:UniqueBlankWindow}
+\end{figure}
+To demonstrate we will create a composite key of the columns fullName and phoneNumber in the User table. After selecting the columns you can press the key icon to create the key. You can see that the alternative is created in the area below the table view.
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=0.7\textwidth]{sqlitestudio/sqlitestudioimages/CreateAN/AlternativekeySUCES.png}
+  \caption{Table view for user table with the alternative key.}
+  \label{fig:SucessAlternativeKey}
+\end{figure}
+
 \subsection{Foreign Keys}
 \label{sqliteStudioForeignKeys}
 Inbetween the primary key icon and three squares there is a picture of two tables with a link between them, press this button.
@@ -639,8 +659,6 @@ Inbetween the primary key icon and three squares there is a picture of two table
   \caption{View over MailAddress table with the button for creating a foreign key.}
   \label{fig:MailAddressForeignKeysButton}
 \end{figure}
-%TODO: New mail type is not in the images REDO
-%TODO: add red arrow to the button
 The window will allow you to select a foreign table and the columns that should be part of the foreign key.
 \begin{figure}[!htb]
   \centering
@@ -672,7 +690,6 @@ In MailGoesTo we have two columns that are part of the same foreign key and have
 \subsection{Inserting Data}
 \label{sqliteStudioInsertingData}
 To insert data in SQLiteStudio you press the data button on the top of table view. 
-%TODO: image borde ha röd pil
 \begin{figure}[!htb]
   \centering
   \includegraphics[width=0.7\textwidth]{sqlitestudio/sqlitestudioimages/Insertdata/InsertdataFINDDATAVIEW.png}
@@ -698,8 +715,7 @@ Press the green checkmark to save the data.
   
 \subsection{Querying Data}
 \label{sqliteStudioQueryingData}
-To create and run a query can be done by either pressing create view or open sql editor.
-%TODO: image should have red arrow
+To create and run a query, can be done by either pressing create view or open sql editor.
 \begin{figure}[!htb]
   \centering
   \includegraphics[width=0.7\textwidth]{sqlitestudio/sqlitestudioimages/Querys/CreatequeryFINDQUERY.png}
