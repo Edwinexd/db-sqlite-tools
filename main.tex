@@ -64,7 +64,7 @@
 \title{Database Methodology - SQLite Implementation Tools}
 
 % Write the name and user namn for all contributors, se below for \and
-\author{Edwin Sundberg \url{edwin.sundberg@dsv.su.se}\and Melle Carnesten \url{melle.carnesten@dsv.su.se}}
+\author{Edwin Sundberg \url{edwin.sundberg@dsv.su.se} \and Melle Carnesten \url{melle.carnesten@dsv.su.se}}
 % \and Person 2 \url{username2}
 
 \begin{document}
@@ -159,7 +159,7 @@ For more information on why this is the case see \cite{dbeaver_issue_18491}.
 
 \subsubsection{Foreign Key Constraints are not enforced}
 \label{dbeaverForeignKeysNotEnforced}
-DBeaver des not enforce foreign key constraints by default. This can either be enabled when creating a new database (see \autoref{dbeaverCreatingDatabase}) or by editing the database connection settings as follows:
+DBeaver does not enforce foreign key constraints by default. This can either be enabled when creating a new database (see \autoref{dbeaverCreatingDatabase}) or by editing the database connection settings as follows:
 \begin{enumerate}
     \item Right-click on the connection and choose ``Edit Connection''. (\autoref{fig:edit_connection})
     \item Go to ``Connection settings'' → ``Driver properties'' (\autoref{fig:edit_driver_properties}).
@@ -252,7 +252,7 @@ From the database model, we will be implementing the User and the MailAddress ta
 \begin{enumerate}
   \item \label{dbeaverCreateTable} Expand the database connection and right-click on ``Tables'' and choose ``Create New Table'' (\autoref{fig:create_new_table}).
   \item Fill out the Table Name field, navigate to the ``Columns'' tab, right click and choose ``Add Column'' (\autoref{fig:name_and_add_column}).
-  \item \label{dbeaverAddColumn} Add the column for username, set the datatype to ``TEXT'', check the box for ``Not Null'' and the box for ``Unique'' in order to create a single column primary key (\autoref{fig:username_primary_key}).
+  \item \label{dbeaverAddColumn} Add the column for username, set the datatype to ``TEXT'', check the box for ``NOT NULL'' and the box for ``Unique'' in order to create a single column primary key (\autoref{fig:username_primary_key}).
   \item Repeat step \ref{dbeaverAddColumn} for the columns ``fullName'' and ``phoneNumber'' but without checking the box for ``Unique''.
   \item Save with ``Ctrl + S'' (or your operating system's equivalent) and press ``Execute''.
   \item The resulting table can be visualized using DBeaver's built in ER Diagram tool (\autoref{fig:user_er_diagram}). 
@@ -492,9 +492,9 @@ Nothing to note at this time!
 \subsection{Common Problems}
 \label{sqliteStudioCommonProblems}
 
-\subsection {My table disapered}
+\subsection {Table Missing}
 \label{sqliteStudioTableDisapered}
-sqlitestudio has each table in its own tab, if you acedently go to a new table and your old one disapered from view. Check the tabs at the bottom of the screen.
+SQLiteStudio has each table in its own tab, if you acedently go to a new table and your old one disapered from view. Check the tabs at the bottom of the screen.
 \begin{figure}[!htb]
   \centering
   \includegraphics[width=0.7\textwidth]{sqlitestudio/common_problems/table_disapered.png}
@@ -536,7 +536,7 @@ To create a database in SQLiteStudio start by pressing the button Database in th
   \caption{Popup for creating a new database in SQLiteStudio.}
   \label{fig:createDBpopupblank}
 \end{figure}
-Select create a new database. The textfield under the path to where you want to store your databse, click on the folder next to it and navigate to the folder you want to store your databse in. I suggest creating a folder in documents to store the database in. After selecting your folder you should enter the filename following this format [EXAMPLE.db], as you can see in \autoref{fig:createDBnavigate} I called it mail.db  
+Select create a new database. The textfield under the path to where you want to store your databse, click on the folder next to it and navigate to the folder you want to store your databse in. I suggest creating a folder in documents to store the database in. After selecting your folder you should enter the filename following this format ``Example.db3'', as you can see in \autoref{fig:createDBnavigate} I called it mail.db  
 \begin{figure}[!htb]
   \centering
   \includegraphics[width=0.7\textwidth]{sqlitestudio/create_database/create_database_navigate.png}
@@ -550,7 +550,7 @@ The name textfield is where you enter the name of your database. \autoref{fig:cr
   \caption{How the popup should look when entered everything.}
   \label{fig:createDBfilled}
 \end{figure}
-After that you can press OK and your database will be created. The database will apper in left under "Databases".
+After that you can press OK and your database will be created. The database will apper in left under ``Databases''.
 
 \subsection{Creating a Table}
 \label{sqliteStudioCreatingTable}
@@ -575,27 +575,27 @@ After selecting create new table you will be presented with a blank table,se \au
   \caption{The dropout menu for creating a new table in SQLiteStudio.}
   \label{fig:CreateTableBlanktable}
 \end{figure}
-At the top of the user table all options will be greyed out execpt for "commit structure changes" and "add column". Press add column. You will be presented with the window to create a column, \autoref{fig:BlankNewColumn}. 
+At the top of the user table all options will be greyed out execpt for ``commit structure changes'' and ``add column''. Press add column. You will be presented with the window to create a column, \autoref{fig:BlankNewColumn}. 
 \begin{figure}[!htb]
   \centering
   \includegraphics[width=0.7\textwidth]{sqlitestudio/create_table/create_table_column_blank.png}
   \caption{Blank menu for creating a new column in SQLiteStudio.}
   \label{fig:BlankNewColumn}
 \end{figure}
-The first column we will create is the username column. The name of the column is username and then select the datatype from the list next to the name of the column. We will make it the primary key and set it to Not Null by checking the boxes ,\autoref{fig:FilledNewColumnUser}. 
+The first column we will create is the username column. The name of the column is username and then select the datatype from the list next to the name of the column. We will make it the primary key and set it to NOT NULL by checking the boxes ,\autoref{fig:FilledNewColumnUser}. 
 \begin{figure}[!htb]
   \centering
   \includegraphics[width=0.7\textwidth]{sqlitestudio/create_user/create_user_column_populated.png}
   \caption{Filled menu for creating a new column in SQLiteStudio.}
   \label{fig:FilledNewColumnUser}
 \end{figure}
-Now you can press "Commit structure changes" to save the table. Then you will get a window with a sql query that will be executed to create the table, you don't need to do anything here just press OK. 
+Now you can press ``Commit structure changes'' to save the table. Then you will get a window with a sql query that will be executed to create the table, you don't need to do anything here just press OK. 
 %Picture for the query exist but was demend to not be needed
 You can repeat the steaps from adding the username column to add the fullName and phoneNumber columns.   
 
 \subsubsection{MailAddress Table}
 \label{sqliteStudioMailAddressTable}
-MailAddress table is created in the same way as the User table. The only difference is that the primary key is a composite key. It is both the username and domain columns. We will start with the same steps and creating a new table as we did with the User table. After that we will add the username and domain columns, checking both as Not null but importantly not as a primary key! The table should look like \autoref{fig:MailAddressTableNoKeys}.
+MailAddress table is created in the same way as the User table. The only difference is that the primary key is a composite key. It is both the username and domain columns. We will start with the same steps and creating a new table as we did with the User table. After that we will add the username and domain columns, checking both as NOT NULL but importantly not as a primary key! The table should look like \autoref{fig:MailAddressTableNoKeys}.
 \begin{figure}[!htb]
   \centering
   \includegraphics[width=0.7\textwidth]{sqlitestudio/create_mail_address/create_mail.png}
@@ -610,7 +610,7 @@ In the items on the bottom of the table view you can see a key icon, press this 
   \caption{Menu for adding primary keys in MailAddress table.}
   \label{fig:MailAddressTablePrimaryKeys}
 \end{figure}
-Select the username and domain columns. You can and should (for now) ignore the rest of the options in the window. Press create and then press "Commit structure changes" to save the table. After that you can create the rest of the columns in the same way as you did with the User table. If you got a key eye for UML diagrams you can see that username will be a foerign key in MailAddress table, foreign keys will be covered later under the chapter Foreign Keys.  
+Select the username and domain columns. You can and should (for now) ignore the rest of the options in the window. Press create and then press ``Commit structure changes'' to save the table. After that you can create the rest of the columns in the same way as you did with the User table. If you got a key eye for UML diagrams you can see that username will be a foerign key in MailAddress table, foreign keys will be covered later under the chapter Foreign Keys.  
 \subsubsection{MailGoesTo Table}
 \label{sqliteStudioMailGoesToTable}
 MailGoesTo is table created to handle a many to many relationship between inbox and MailAddress tables. This means both of it keys will be foreign keys to other tables. You don't have to worry about foreign keys as they will be covered in more detail later. As the rules on creating a table for a many to many relationship the primary keys in MailGoesTo will the primary keys of Inbox and MailAddress. Nothing new will be covered in this section, as such this will be left as an exercise. After creating the table it should look like \autoref{fig:MailGoesToTable}. 
@@ -667,7 +667,7 @@ We will create a foreign key between the username column in MailAddress and the 
   \caption{Popup to create a foreign key}
   \label{fig:MailAddressForeignKeysDropDown}
 \end{figure}
-You can also set reaction incase the key it refrerencing is deleted or updated T.ex a person changes their username. Set the behaviour to what is appropriate for your case, se \autoref{fig:MailAddressForeignKeysFilledWindow}. Then press create and the foreign key will be created.
+You can also set condition for if the key it refrerencing is deleted or updated, for example, a person changes their username. Set the behaviour to what is appropriate for your case, se \autoref{fig:MailAddressForeignKeysFilledWindow}. Then press create and the foreign key will be created.
 \begin{figure}[!htb]
   \centering
   \includegraphics[width=0.7\textwidth]{sqlitestudio/create_foreign_key/foreign_key_populated.png}
@@ -686,14 +686,14 @@ In MailGoesTo we have two columns that are part of the same foreign key and have
 To insert data in SQLiteStudio you press the data button,\autoref{fig:insertdataFindDataView}, on the top of table view. 
 \begin{figure}[!htb]
   \centering
-  \includegraphics[width=0.7\textwidth]{sqlitestudio/Insertdata/insert_data_find_view.png}
+  \includegraphics[width=0.7\textwidth]{sqlitestudio/insert_data/insert_data_find_view.png}
   \caption{Table view för user table}
   \label{fig:insertdataFindDataView}
 \end{figure}
 After pressing it you will be presented with a data window, se \autoref{fig:insertdataDataViewBlank}.
 \begin{figure}[!htb]
   \centering
-  \includegraphics[width=0.7\textwidth]{sqlitestudio/Insertdata/insert_data_view_blank.png}
+  \includegraphics[width=0.7\textwidth]{sqlitestudio/insert_data/insert_data_view_blank.png}
   \caption{Data view for user table}
   \label{fig:insertdataDataViewBlank}
 \end{figure}
@@ -701,7 +701,7 @@ Press the green plus to add a row. You can now enter the data for the columns in
 %Exists image with blank row was demend to not be needed
 \begin{figure}[!htb]
   \centering
-  \includegraphics[width=0.7\textwidth]{sqlitestudio/Insertdata/insert_data_row_populated.png}
+  \includegraphics[width=0.7\textwidth]{sqlitestudio/insert_data/insert_data_row_populated.png}
   \caption{Data view with data}
   \label{fig:InsertdataROWFILLED}
 \end{figure}
@@ -709,14 +709,14 @@ Press the green checkmark to save the data, \autoref{fig:InsertdataROWFILLED}.
   
 \subsection{Querying Data}
 \label{sqliteStudioQueryingData}
-To create and run a query, can be done by either pressing create view or open sql editor, se \autoref{fig:Findquery}.
+To create and run a query, can be done by either pressing create view or open SQL editor, see \autoref{fig:Findquery}.
 \begin{figure}[!htb]
   \centering
   \includegraphics[width=0.7\textwidth]{sqlitestudio/queries/create_query_find.png}
   \caption{Find query buttons}
   \label{fig:Findquery}
 \end{figure} 
-We recommend create view as this will save your queries. After pressing create view you will be presented with a blank window (\autoref{fig:blankquery}) where you can write your query and in the top you can enter your view name.
+Using CREATE VIEW may be benefictial as it will save your queries. After pressing create view you will be presented with a blank window (\autoref{fig:blankquery}) where you can write your query and in the top you can enter your view name.
 \begin{figure}[!htb]
   \centering
   \includegraphics[width=0.7\textwidth]{sqlitestudio/queries/create_query_blank.png}
