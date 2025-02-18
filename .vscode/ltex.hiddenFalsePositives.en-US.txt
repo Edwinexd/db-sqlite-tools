@@ -1,1 +1,2 @@
 {"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qbibtex\\E$"}
+{"rule":"FROM_FORM","sentence":"^\\QThis is usually a logical error and should not be ignored and the datatype in the from or to column should be changed to match.\\E$"}
