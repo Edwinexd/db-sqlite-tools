@@ -487,7 +487,20 @@ And the process for doing this in DBeaver is as follows:
 
 \subsection{Relevant Known Issues}
 \label{sqliteStudioKnownIssues}
-Nothing to note at this time!
+
+\subsection{Creating self-referencing foreign keys}
+\label{sqliteStudioSelfReferencingForeignKeys}
+To create a self-referencing foreign key in SQLiteStudio, for example, a foreign key in the User table that references the User table itself, you will have to create the table without the foreign key first. After that, you can go to the table and add the foreign key.
+
+If the table structure is not properly created/committed before attempting to add the foreign key the target table will not be available in the dropdown list of tables to reference. See \autoref{fig:fnTableNotCommitted} for an example of this.
+
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=0.8\textwidth]{sqlitestudio/fn_table_not_committed.png}
+  \caption{The table is not available in the dropdown list of tables to reference.}
+  \label{fig:fnTableNotCommitted}
+\end{figure}
+
 
 \subsection{Common Problems}
 \label{sqliteStudioCommonProblems}
@@ -743,6 +756,8 @@ All saved views will be shown in the view list right below your tables, \autoref
 \label{sqliteERD}
 SQLite ERD is an application that can be used to create Entity Relationship Diagrams (ERDs) for SQLite databases. The application is platform-independent and is used within a web browser. The application can be found at \url{https://sqlite-erd.e-su.se/}. For the interested reader, the source code can be found at \url{https://github.com/Edwinexd/sqlite-erd}.
 The application supports most common file formats for SQLite databases, only requiring that the file is a SQLite database of version 3.
+
+The application also performs some semantic analysis on the database, such as checking for foreign key data types and ensuring that foreign columns are unique.
 
 % TODO: include figure generated from sqlite-erd
 
