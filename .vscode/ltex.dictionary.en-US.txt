@@ -12,3 +12,6 @@ addressDomain
 Melle
 Carnesten
 stevensson
+Datatypes
+datatypes
+strftime

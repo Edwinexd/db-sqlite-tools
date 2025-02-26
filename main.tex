@@ -54,9 +54,10 @@
   basicstyle=\ttfamily\small,
   keywordstyle=\color{blue},
   stringstyle=\color{red},
-  commentstyle=\color{green},
+  commentstyle=\color{gray},
   captionpos=b, % This sets the caption below the listing
-  showstringspaces=false
+  showstringspaces=false,
+  literate={'}{{\textquotesingle}}1
 }
 
 % LTeX: enabled=true
@@ -129,6 +130,106 @@ The following tools will be presented in this document:
     \item SQLiteStudio (see \autoref{sqliteStudio})
     \item SQLite ERD (see \autoref{sqliteERD})
 \end{itemize}
+along with some specifics of SQLite in general (see \autoref{sqliteInGeneral}).
+
+\section{SQLite in General}
+\label{sqliteInGeneral}
+
+\subsection{Datatypes}
+\label{sqliteDatatypes}
+Typing is not strict in SQLite, but we recommend to stick to the following datatypes for the database model:
+\begin{itemize}
+  \item INTEGER
+  \item TEXT
+  \item REAL
+  \item BLOB (Binary Large Object)
+\end{itemize}
+While typing is not strict it is still highly recommended to insert data of the correct type to avoid logical errors, i.e. only insert integers into INTEGER columns and no strings into INTEGER columns. Note: SQLite ERD (see \autoref{sqliteERD}) will throw semantic errors if there exists data of the ``wrong'' type in a column.
+
+\subsection{Date and Time Management}
+\label{sqliteDateTime}
+
+Since there does not exist a specific datatype for date and time in SQLite, the official recommendation is to store it in one of the following formats: \cite{sqlite_date_time}
+\begin{itemize}
+  \item TEXT - containing ISO-8601 strings (e.g. ``YYYY-MM-DD HH:MM:SS.SSS'' or ``YYYY-MM-DD'')
+  \item INTEGER - Unix Time (see \url{https://www.unixtimestamp.com/})
+  \item REAL - Julian Day Number (see \url{https://en.wikipedia.org/wiki/Julian_day})
+\end{itemize}
+
+\subsubsection{Handling Dates Correctly}
+There are a few approaches to handle dates correctly in SQLite, the following are some examples of querying all ``inboxes'' that have been created during the year 2025:
+
+\begin{lstlisting}[caption={Querying using BETWEEN}, label={lst:sqliteBetween}]
+SELECT
+  *
+FROM
+  inboxes
+WHERE
+  createdAt BETWEEN '2025-01-01' AND '2025-12-31';
+\end{lstlisting}
+
+\begin{lstlisting}[caption={Querying using strftime}, label={lst:sqliteStrftime}]
+SELECT
+    *
+FROM
+    inboxes
+WHERE
+    -- The strftime function extracts the year (%Y) from
+    -- the 'createdAt' column.
+    -- It returns the year as a text
+    -- string (e.g., '2025').
+    CAST(
+        strftime('%Y', createdAt)
+        AS INT  -- The CAST converts the year string to 
+                -- an integer for numeric comparison.
+    ) = 2025;
+\end{lstlisting}
+
+For a complete list of possible parameters to ``strftime'' used in \autoref{lst:sqliteStrftime} see \cite{sqlite_date_time}.
+
+The solutions presented above will work independently of the format the date is stored in the database (i.e. TEXT, INTEGER, REAL) assuming the datatype matches the format as explained in \autoref{sqliteDateTime}.
+
+\subsubsection{Anti-examples of Date and Time Management}
+
+The following are anti-examples of how to \textbf{not} handle dates in SQLite. The following examples may produce unexpected results and should be avoided as they handle the date as a string and not as a date and will completely break if Unix Time or Julian Day Number is used (or switched to) as the storage format.
+
+\begin{lstlisting}[caption={Anti-example of date querying using LIKE}, label={lst:sqliteLike}]
+SELECT
+  *
+FROM
+  inboxes
+WHERE
+  -- Matches all strings starting with
+  -- '2025' (e.g. '2025HELLO').
+  createdAt LIKE '2025%';
+\end{lstlisting}
+
+\begin{lstlisting}[caption={Anti-example of date querying using >=}, label={lst:sqliteGreaterEqual}]
+SELECT
+  *
+FROM
+  inboxes
+WHERE
+  -- Matches all strings starting with
+  -- '2025' (e.g. '2025HELLO').
+  createdAt >= '2025';
+OR
+  -- Is internally casted to the same as above.
+  createdAt >= 2025;
+\end{lstlisting}
+
+\begin{lstlisting}[caption={Anti-example of date querying with incorrect BETWEEN}, label={lst:sqliteBetweenIncorrect}]
+SELECT
+  *
+FROM
+  inboxes
+WHERE
+  -- This will return an undefined result set since
+  -- DD/MM/YYYY is not ISO-8601 format.
+  createdAt BETWEEN '01/01/2025' AND '12/31/2025';
+\end{lstlisting}
+
+
 
 \section{DBeaver Community}
 \label{dbeaverCommunity}
@@ -389,7 +490,7 @@ A single column foreign key relationship between User.(username) and MailAddress
 
 \subsubsection{MailGoesTo → MailAddress}
 \label{dbeaverMailGoesToMailAddressRelationship}
-C composite foreign key relationship between MailGoesTo.(addressUsername, addressDomain) and MailAddress.(username, domain), can be created as follows:
+A composite foreign key relationship between MailGoesTo.(addressUsername, addressDomain) and MailAddress.(username, domain), can be created as follows:
 
 \begin{enumerate}
   \item Navigate to the ``Foreign Keys'' tab of the MailGoesTo table.
@@ -757,7 +858,7 @@ All saved views will be shown in the view list right below your tables, \autoref
 SQLite ERD is an application that can be used to create Entity Relationship Diagrams (ERDs) for SQLite databases. The application is platform-independent and is used within a web browser. The application can be found at \url{https://sqlite-erd.e-su.se/}. For the interested reader, the source code can be found at \url{https://github.com/Edwinexd/sqlite-erd}.
 The application supports most common file formats for SQLite databases, only requiring that the file is a SQLite database of version 3.
 
-The application also performs some semantic analysis on the database, such as checking for foreign key data types and ensuring that foreign columns are unique.
+The application also performs some semantic analysis on the database, such as checking for foreign key datatypes and ensuring that foreign columns are unique.
 
 The complete implemented database model can be seen in, \autoref{fig:modelSQLiteERD}
 
