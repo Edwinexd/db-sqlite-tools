@@ -187,6 +187,17 @@ WHERE
 
 For a complete list of possible parameters to ``strftime'' used in \autoref{lst:sqliteStrftime} see \cite{sqlite_date_time}.
 
+If we are more interested in querying for a specific date the following query can be used:
+
+\begin{lstlisting}[caption={Querying using date()}, label={lst:sqliteDate}]
+SELECT
+  *
+FROM
+  inboxes
+WHERE
+  date(createdAt) = '2025-01-01';
+\end{lstlisting}
+
 The solutions presented above will work independently of the format the date is stored in the database (i.e. TEXT, INTEGER, REAL) assuming the datatype matches the format as explained in \autoref{sqliteDateTime}.
 
 \subsubsection{Anti-examples of Date and Time Management}
